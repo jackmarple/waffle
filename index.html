@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="Jack Marple">
+<meta name="keywords" content="Jack Marple, Industrial Design, Design, Graphic Design, Seattle, Washington, Phoenix, Arizona">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" media="screen" type="text/css" href="style.css" />
+<title>Jack Marple</title>
+<style>
+   #gamediv {
+    border: 3px solid black;
+    background: white;
+    box-shadow: 10px 10px;
+    z-index: 2;
+    position: fixed;
+    bottom: 20%;
+    left: 24px;
+</style>
+</head>
+    
+<body media="screen">
+    
+<section class="logoSection">
+    <img class="logo" src="images/jackmarplelogo.png">
+</section>
+    
+<div id="gamediv" style="display: none;">
+      <div class=gameTitle>play snake for fun while you browse</div>
+<canvas width="400" height="400" id="game"></canvas>
+<script>
+document.addEventListener("keydown", function (e) {
+  if([37,38,39,40].indexOf(e.keyCode) > -1){
+    e.preventDefault();
+    // Do whatever else you want with the keydown event (i.e. your navigation).
+  }
+}, false);
+var canvas = document.getElementById('game');
+var context = canvas.getContext('2d');
+var grid = 16;
+var snake = {
+  x: 160,
+  y: 160,
+  dx: grid,
+  dy: 0,
+  cells: [],
+  maxCells: 4
+};
+var count = 0;
+var apple = {
+  x: 320,
+  y: 320
+};
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+// game loop
+function loop() {
+  requestAnimationFrame(loop);
+  // slow game loop to 15 fps instead of 60 - 60/15 = 4
+  if (++count < 4) {
+    return;
+  }
+  count = 0;
+  context.clearRect(0,0,canvas.width,canvas.height);
+  snake.x += snake.dx;
+  snake.y += snake.dy;
+  // wrap snake position on edge of screen
+  if (snake.x < 0) {
+    snake.x = canvas.width - grid;
+  }
+  else if (snake.x >= canvas.width) {
+    snake.x = 0;
+  }
+  if (snake.y < 0) {
+    snake.y = canvas.height - grid;
+  }
+  else if (snake.y >= canvas.height) {
+    snake.y = 0;
+  }
+  // keep track of where snake has been. front of the array is always the head
+  snake.cells.unshift({x: snake.x, y: snake.y});
+  // remove cells as we move away from them
+  if (snake.cells.length > snake.maxCells) {
+    snake.cells.pop();
+  }
+  // draw apple
+  context.fillStyle = 'pink';
+  context.fillRect(apple.x, apple.y, grid-1, grid-1);
+  // draw snake
+  context.fillStyle = 'turquoise';
+  snake.cells.forEach(function(cell, index) {
+    context.fillRect(cell.x, cell.y, grid-1, grid-1);
+    // snake ate apple
+    if (cell.x === apple.x && cell.y === apple.y) {
+      snake.maxCells++;
+      apple.x = getRandomInt(0, 25) * grid;
+      apple.y = getRandomInt(0, 25) * grid;
+    }
+    // check collision with all cells after this one (modified bubble sort)
+    for (var i = index + 1; i < snake.cells.length; i++) {
+      
+      // collision. reset game
+      if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+        snake.x = 160;
+        snake.y = 160;
+        snake.cells = [];
+        snake.maxCells = 4;
+        snake.dx = grid;
+        snake.dy = 0;
+        apple.x = getRandomInt(0, 25) * grid;
+        apple.y = getRandomInt(0, 25) * grid;
+      }
+    }
+  });
+}
+document.addEventListener('keydown', function(e) {
+  // prevent snake from backtracking on itself
+  if (e.which === 37 && snake.dx === 0) {
+    snake.dx = -grid;
+    snake.dy = 0;
+  }
+  else if (e.which === 38 && snake.dy === 0) {
+    snake.dy = -grid;
+    snake.dx = 0;
+  }
+  else if (e.which === 39 && snake.dx === 0) {
+    snake.dx = grid;
+    snake.dy = 0;
+  }
+  else if (e.which === 40 && snake.dy === 0) {
+    snake.dy = grid;
+    snake.dx = 0;
+  }
+});
+requestAnimationFrame(loop);
+</script>
+    </div>
+         
+<section class="personalInfo">
+    <p>Jack Marple is an 
+    <a class="gameLink" href="javascript:void(0)" onClick="myFunction();">industrial designer</a> based in Seattle.
+    <br>
+    <span><a href="mailto:hello@jackmarple.com">hello@jackmarple.com</a></span>
+    <br>
+    <br>
+    <span style="width:100px;display:inline-block"><a href="https://www.linkedin.com/in/jackmarple/"target="_blank">linkedin</a></span>
+    <span style="width:120px;display:inline-block"><a href="https://www.instagram.com/jackmarple/"target="_blank">instagram</a></span>
+    <span style="width:110px;display:inline-block"><a href="https://www.behance.net/jackmarple"target="_blank">behance</a></span>
+    <span style="width:75px;display:inline-block"><a href="http://jackmarple.tumblr.com/"target="_blank">inspirations</a></span>
+    </p>
+   <script>
+       function myFunction() {
+    var x = document.getElementById("gamediv");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
+</section>
+
+<section class="copyright">
+    <p><font size="1">
+    © 2018 Jack Marple
+    </font>
+    </p>
+</section>
+            
+<section class="projectImages">
+    <div class=scrollTitle><span style=height:100px;display:inline-block><p>scroll to see work</p></span></div>
+    <div class="contentContainer">
+        <div class="projectDescription">
+        <p>
+        contra tea light
+        <br>
+        2018
+        <br>
+        <br>
+        The contra tea light holder is an object that expresses the need for opposites.
+        <br>
+        <br>
+        Contra is a prefix that can be used to make a word mean the opposite. During the development of this concept, I was drawn towards the idea of opposites and how necessary is it to have opposites in life. We would never be able to know what happiness was if we were to not feel sadness. The contrast in our experiences is part of what makes us human.
+        <br>
+        <br>
+        The Contra tea light holder utilizes rough and smooth materials that represent the experiences that shape us. The base is constructed from a 3D printed steel (rough) and acts as the foundation. The porcelain tea light holder (smooth) sits atop the steel piece and showcases the flame of the candle. This symbolism shows how the difficult situations we experience help build the foundation and light the flame for the good times that will indeed lie ahead.
+        </p>
+        </div>
+        
+        <img class="projectImage" src="images/DSC03822.jpg">
+        <img class="projectImage" src="images/explanation%20sketch.jpg">
+        <img class="projectImage" src="images/OTHR%20contra%20proposal%20v02.jpg">
+        <img class="projectImage" src="images/DSC03841.jpg">
+        <img class="projectImage" src="images/DSC04513.jpg">
+        <img class="projectImage" src="images/strike-gif-file_small.gif">
+        <img class="projectImage" src="images/DSC03904.jpg">
+        <img class="projectImage" src="images/DSC03850.JPG">
+        <img class="projectImage" src="images//DSC03890.jpg">
+        <img class="projectImage" src="images/DSC03876.JPG">
+        
+        <div class="projectDescription">
+        <p>
+        <br>
+        <br>
+        uncomfortable chairs
+        <br>
+        2017
+        <br>
+        <br>
+        Uncomfortable chairs is an exploration in how furniture could hurt our feelings.
+        <br>
+        <br>
+        Designers constantly focus on making the user’s life better and more comfortable. In contrast, I began to think about what it would be like to have a product that was designed to make life more difficult. The idea developed into three chairs with distinct personalities; each with a strategy to make your life more frustrating.
+        <br>
+        <br>
+        “Dumped” is a chair that lets you relive the feeling of being dumped. You will think you have support, but before you know it you will be sitting on the ground, not knowing what has happened or how you can fix it. “Tipped” helps you remember that you can’t keep it together all the time. You may try your best to balance, but you will tip over the second you take your mind off the task at hand. And “Stabbed” brings to mind all the times you may have been stabbed in the back. The chair looks inviting - but when you plop yourself down, don’t be surprised with the pain you might feel.
+        </p>
+        </div>
+        
+        <img class="projectImage" src="images/uncomfortable%20chairs_v2_cover.jpg">
+        <img class="projectImage" src="images/stick%20men%20in%20a%20row.jpg">
+        <img class="projectImage" src="images/uncomfortable%20chairs_v14.jpg">
+        <img class="projectImage" src="images/uncomfortable%20chairs_v15.jpg">
+        <img class="projectImage" src="images/uncomfortable%20chairs_v16.jpg">
+        <img class="projectImage" src="images/uncomfortable%20chairs_v19.jpg">
+        <img class="projectImage" src="images/uncomfortable%20chairs_v110.jpg">
+        <img class="projectImage" src="images/uncomfortable%20chairs_v111.jpg">
+        <img class="projectImage" src="images/uncomfortable%20chairs_v2.jpg">
+        <img class="projectImage" src="images/uncomfortable%20chairs_v115.jpg">
+        <img class="projectImage" src="images/uncomfortable%20chairs_v116.jpg">
+        
+        <div class="projectDescription">    
+        <p>
+        poolsense
+        <br>
+        2017
+        <br>
+        <br>
+        The poolsense concept gives pool safety an unassuming face.
+        <br>
+        <br>
+        Safety and security are essential elements to living a healthy life. We all have the need to feel protected. With the development of the Internet of Things, we now have products to help us achieve that secure feeling. I had the opportunity to work with a startup called Halen and support the concept development  of their product, Poolsense. <br>
+        <br>
+        The Poolsense system is made up of two units: one that stays in the pool to detect unplanned movement and another that stays in the home to act as an alarm, hub and interaction point. These units are constantly connected and ready to alert you of an emergency.
+        </p>
+        </div>
+        
+        <img class="projectImage" src="images/moneyyyyy.jpg">
+        <img class="projectImage" src="images/botttom%20detail.jpg">
+        <img class="projectImage" src="images/in%20pool.jpg">
+        <img class="projectImage" src="images/exploded.jpg">
+        <img class="projectImage" src="images/messages%20all%20together.jpg">
+        <img class="projectImage" src="images/pattern.jpg">
+        <img class="projectImage" src="images/in%20context.jpg">
+        
+        
+        
+    </div>
+    
+    
+</section>
+
+    
+</body>
+</html>
