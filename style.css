@@ -1,0 +1,138 @@
+d/* CSS RESET */
+* { margin: 0; padding: 0; line-height: 1em; }
+p, h1, h2, h3, form, table { margin: 20px 0; }
+ul, ol {margin: 20px 0 20px 20px; }
+a { margin:0; padding:0; line-height: 1em; }
+a:hover { text-decoration: none;
+        color: pink}
+div { overflow: hidden; }
+.access { display: block; width: 0; height: 0; overflow: hidden; position: absolute; }
+p { line-height: 1.3em; }
+/**** End Reset ****/
+
+
+/* Self Code */
+
+body, body {
+	margin: 0px;
+	display: block;
+	padding: 15px 15px 15px 15px;
+	font-size: 1.2em;
+	margin: 0px;
+    line-height: 200%;
+    width: 100%;
+	font-family: "Akkurat-Mono", Arial, sans-serif;
+	background-color: #F5F5F5;
+	font-weight: normal;
+}
+
+head {
+    display: none;
+}
+
+@font-face {
+  font-family: "Akkurat-Mono";
+  src: url("akkurat-mono.otf");
+}
+
+@media screen and (max-width: 1000000px) {
+    html {
+        font-size: 80%; /* Base font-size of 32px */
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+.logo {
+    width: 160px;
+    position: fixed;
+    margin: 0;
+    padding: 7px 15px 15px 8px;
+    z-index: 1;
+}
+.personalInfo {
+    position: fixed;
+    bottom: 25px;
+	padding: 15px 15px 0px 8px;
+    z-index: 1;
+}
+.contentContainer {
+	margin: auto;
+	width: 100%;
+	position: relative;
+	padding: 40px 0 25px 0;
+}
+
+.projectImage {
+	width: 80%;
+	display: block;
+    float: right;
+    z-index: -1;
+    padding: 10px
+}
+.scrollTitle {
+    float: right;
+    padding: 23% 10px 25% 0;
+    
+}
+.copyright {
+    right: 25px;
+    bottom: 25px;
+    position: fixed;
+    z-index: 1;
+}
+.projectDescription {
+    display: block;
+    width: 40%;
+    float: right;
+    text-align: left;
+    padding: 10px;
+}
+.gamediv {
+    position: fixed;
+    float: left;
+    z-index: 2;
+    background: white;
+    box-shadow: 10px 10px;
+}
+.gameTitle {
+    font-family: monospace;
+    padding: 0 10px;
+}
+
+/*character styles*/
+
+p {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+}
+p:last-of-type { margin: 0; }
+a {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+    color: black;
+    text-decoration: none
+}
+    
+i {
+	font-family: Akkurat-Mono;
+    text-decoration: none;
+    color: #343434; 
+}
+b {
+	font-family: Akkurat-Mono;
+    text-decoration: none;
+    color: #343434; 
+}
+li {
+    display: list-item;
+}
